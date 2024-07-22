@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+            background-color: #f5f7fa;
+        }
+
+        .back-button {
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1em;
+            background-color: red;
+            border-radius: 8px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .content {
+            margin-top: 60px; /* To avoid overlap with the fixed button */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .hidden-text, .hidden-text-2 {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .pdf-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showApp() {
+            document.getElementById('hiddenText').style.display = 'block';
+            document.getElementById('hiddenText2').style.display = 'none';
+        }
+
+        function showAutres() {
+            document.getElementById('hiddenText').style.display = 'none';
+            document.getElementById('hiddenText2').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <a href="index.html" class="back-button">Retourner au menu</a>
+    <div class="content">
+        <div class="dropdown">
+            <button class="button dropbtn">Choix de documentation</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="showApp()">App</a>
+                <a href="#" onclick="showAutres()">Autres</a>
+            </div>
+        </div>
+        <div id="hiddenText" class="hidden-text">
+            <table>
+                <tr>
+                    <th>Nom</th>
+                    <th>Sigle</th>
+                    <th>Rapport</th>
+                    <th>Commentaires</th>
+                </tr>
+                <tr>
+                    <td>APP1</td>
+                    <td></td>
+                    <td><a href="https://github.com/documentation-ressources/documentation-ressources/raw/main/README.md" download><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" class="pdf-icon" alt="PDF"></a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>APP2</td>
+                    <td>Électronique analogique I</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>APP3</td>
+                    <td>Analyse et représentation de données scientifiques</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>APP4</td>
+                    <td>Ingénierie durable et évaluation des impacts environnementaux</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>APP5</td>
+                    <td>Électronique analogique et composants</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div id="hiddenText2" class="hidden-text-2">
+            <!-- This div is intentionally left empty for 'Autres' option -->
+        </div>
+    </div>
+</body>
+</html>
