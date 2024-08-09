@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Circuit</title>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Include Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+        }
+        .selector {
+            flex: 1;
+            padding: 40px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        .selector h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .selector label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .selector select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            color: #333;
+        }
+        .display-area {
+            flex: 2;
+            padding: 40px;
+            text-align: center;
+        }
+        .display-area img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+        .custom-text {
+            font-size: 18px;
+            color: #2c3e50;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="selector">
+            <h2>Ressources disponibles</h2>
+            <label for="circuit-selector">Sélectionner une ressource:</label>
+            <select id="circuit-selector">
+                <option value="" disabled selected hidden></option>
+                <option value="circuit1" data-text="This is a basic resistor circuit.">Basic Resistor</option>
+                <option value="circuit2" data-text="This is a full bridge rectifier circuit.">Full bridge rectifier</option>
+                <!-- Add more options with custom text as needed -->
+            </select>
+        </div>
+        <div class="display-area">
+            <img id="circuit-image" src="" alt="Circuit Image">
+            <div id="custom-text" class="custom-text"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#circuit-selector').select2({
+                placeholder: "",
+                allowClear: true,
+                width: 'resolve'
+            });
+
+            $('#circuit-selector').on('change', function() {
+                var selectedValue = $(this).val();
+                var selectedText = $(this).find(':selected').data('text');
+                var image = $('#circuit-image');
+                var customText = $('#custom-text');
+
+                if (selectedValue) {
+                    image.attr('src', 'ressources/' + selectedValue + '.png');
+                    image.fadeIn();
+                    customText.text(selectedText);
+                    customText.fadeIn();
+                } else {
+                    image.fadeOut();
+                    customText.fadeOut();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
