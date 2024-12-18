@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordeur de Guitare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        canvas {
+            display: block;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+
+        #note {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #status {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: red;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-button">Retourner au menu</a>
+    <h1>Accordeur de Guitare</h1>
+    <canvas id="gauge" width="400" height="200"></canvas>
+    <div id="note">Note: --</div>
+    <div id="status">État: En attente...</div>
+
+    <script>
+        const notes = [
+            { note: "E", frequency: 82.41 },
+            { note: "A", frequency: 110.00 },
+            { note: "D", frequency: 146.83 },
+            { note: "G", frequency: 196.00 },
+            { note: "B", frequency: 246.94 },
+            { note: "E", frequency: 329.63 }
+        ];
+
+        const canvas = document.getElementById("gauge");
+        const ctx = canvas.getContext("2d");
+        const noteDisplay = document.getElementById("note");
+        const statusDisplay = document.getElementById("status");
+
+        let audioContext, analyser, dataArray, bufferLength;
+
+        async function setupMicrophone() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+                analyser.fftSize = 2048;
+                bufferLength = analyser.fftSize;
+                dataArray = new Float32Array(bufferLength);
+                detectPitch();
+            } catch (err) {
+                alert("Erreur d'accès au microphone: " + err.message);
+            }
+        }
+
+        function detectPitch() {
+            analyser.getFloatTimeDomainData(dataArray);
+            const frequency = autoCorrelate(dataArray, audioContext.sampleRate);
+            if (frequency !== -1) {
+                updateGauge(frequency);
+            }
+            requestAnimationFrame(detectPitch);
+        }
+
+        function autoCorrelate(buf, sampleRate) {
+            let SIZE = buf.length;
+            let MAX_SAMPLES = Math.floor(SIZE / 2);
+            let bestOffset = -1;
+            let bestCorrelation = 0;
+            let rms = 0;
+
+            for (let i = 0; i < SIZE; i++) {
+                let val = buf[i];
+                rms += val * val;
+            }
+            rms = Math.sqrt(rms / SIZE);
+            if (rms < 0.01) return -1;
+
+            let lastCorrelation = 1;
+            for (let offset = 0; offset < MAX_SAMPLES; offset++) {
+                let correlation = 0;
+                for (let i = 0; i < MAX_SAMPLES; i++) {
+                    correlation += Math.abs(buf[i] - buf[i + offset]);
+                }
+                correlation = 1 - correlation / MAX_SAMPLES;
+                if (correlation > 0.9 && correlation > lastCorrelation) {
+                    bestCorrelation = correlation;
+                    bestOffset = offset;
+                }
+                lastCorrelation = correlation;
+            }
+            if (bestCorrelation > 0.01) {
+                let frequency = sampleRate / bestOffset;
+                return frequency;
+            }
+            return -1;
+        }
+
+        function updateGauge(frequency) {
+            const closestNote = getClosestNote(frequency);
+            noteDisplay.textContent = `Note: ${closestNote.note}`;
+            statusDisplay.textContent = `Fréquence: ${frequency.toFixed(2)} Hz`;
+
+            drawGauge(frequency, closestNote.frequency);
+        }
+
+        function getClosestNote(frequency) {
+            return notes.reduce((prev, curr) => {
+                return (Math.abs(curr.frequency - frequency) < Math.abs(prev.frequency - frequency)) ? curr : prev;
+            });
+        }
+
+        function drawGauge(currentFreq, targetFreq) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const deviation = currentFreq - targetFreq;
+            const maxDeviation = 20;
+            const normalized = Math.max(-1, Math.min(1, deviation / maxDeviation));
+
+            ctx.fillStyle = "#ddd";
+            ctx.fillRect(50, 90, 300, 20);
+
+            ctx.fillStyle = "#3b82f6";
+            ctx.fillRect(200 + normalized * 150, 90, 5, 20);
+
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#333";
+            ctx.fillText("Trop Bas", 50, 130);
+            ctx.fillText("Trop Haut", 300, 130);
+        }
+
+        setupMicrophone();
+    </script>
+</body>
+</html>
