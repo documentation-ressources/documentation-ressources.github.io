@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STEP File Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    #upload {
+      margin: 10px;
+    }
+    #viewer {
+      flex-grow: 1;
+      border: 1px solid #ccc;
+    }
+  </style>
+  <!-- Include xeokit-sdk -->
+  <script src="https://xeokit.github.io/xeokit-sdk/xeokit-sdk.min.js"></script>
+</head>
+<body>
+  <input type="file" id="upload" accept=".step, .stp">
+  <div id="viewer"></div>
+
+  <script>
+    let viewer;
+    let model;
+
+    // Initialize the xeokit Viewer
+    function initViewer() {
+      viewer = new xeokit.Viewer({
+        canvasId: "viewer",
+        transparent: true
+      });
+    }
+
+    // Handle file input
+    document.getElementById('upload').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const arrayBuffer = e.target.result;
+        loadStepFile(arrayBuffer);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+
+    // Load STEP file into xeokit Viewer
+    function loadStepFile(arrayBuffer) {
+      if (model) {
+        model.destroy();
+      }
+
+      const loader = new xeokit.STEPLoader(viewer);
+      loader.load({ data: arrayBuffer })
+        .then((loadedModel) => {
+          model = loadedModel;
+          viewer.cameraFit();
+          console.log('STEP file loaded successfully');
+        })
+        .catch((err) => {
+          console.error('Error loading STEP file:', err);
+        });
+    }
+
+    initViewer();
+  </script>
+</body>
+</html>

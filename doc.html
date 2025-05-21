@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation</title>
@@ -8,120 +11,189 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
         
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
-            background-color: #f5f7fa;
-        }
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+        background-color: #f5f7fa;
+    }
 
-        .back-button {
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            color: #fff;
-            font-size: 1em;
-            background-color: red;
-            border-radius: 8px;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-        }
+    /* Button Container */
+    .button-container {
+       
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+    }
 
-        .content {
-            margin-top: 60px; /* To avoid overlap with the fixed button */
-        }
+    /* Unified Button Styles */
+    .back-button, .dropbtn {
+        width: 15%; /* Both buttons take full container width */
+        padding: 14px 0; /* Equal vertical padding */
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        text-align: center;
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
+    /* Back Button Specific */
+    .back-button {
+        background-color: #e74c3c;
+        color: white;
+        text-decoration: none;
+    }
 
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+    .back-button:hover {
+        background-color: #c0392b;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
+    /* Dropdown Button Specific */
+    .dropbtn {
+        background-color: #2ecc71;
+        color: white;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+    .dropbtn:hover {
+        background-color: #27ae60;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
-        .dropdown:hover .dropbtn {
-            background-color: #333;
-            color: #fff;
-        }
+    /* Content Area */
+    .content {
+        margin-top: 150px; /* Adjusted for stacked buttons */
+    }
 
-        .hidden-text, .hidden-text-2 {
-            display: none;
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
+    /* Dropdown Styles */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 200px; /* Match button width */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        border-radius: 6px;
+        z-index: 1;
+    }
 
-        table {
-            border: 1px solid #333;
-        }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s;
+    }
 
-        th, td {
+    .dropdown-content a:hover {
+        background-color: #ddd;
+        border-radius: 6px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Hidden text sections */
+    .hidden-text, .hidden-text-2 {
+        display: none;
+        margin-top: 20px;
+        font-size: 1.2em;
+    }
+
+    /* Table styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 1px solid #333;
+    }
+
+    th, td {
         width: 25%;
         text-align: left;
         padding: 8px;
         border: 1px solid #000000;
-        }
+    }
 
-        th {
-            background-color: #f2f2f2;
-        }
+    th {
+        background-color: #f2f2f2;
+    }
 
-        .pdf-icon {
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-        }
+    /* Icon styles */
+    .pdf-icon, .ppt-icon {
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+    }
+
+    .center-cell {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    /* Custom paragraph style */
+    p2 {
+        font-size: 1.5em;
+        font-weight: bold;
+        text-decoration: underline;
+        display: block;
+        margin: 20px 0 10px;
+    }
 
 
-        .ppt-icon {
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-        }
 
-        .center-cell {
-            text-align: center;
-            vertical-align: middle;
-        }
 
-        p2 {
-            font-size: 1.5em; /* Adjust the size as needed */
-            font-weight: bold;
-            text-decoration: underline;
-            display: block;
-            margin: 20px 0 10px;
-        }
+    #protected-content {
+      display: none;
+    }
+    #password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: #111;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+    input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
 
-    </style>
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
     <script>
         function showApp() {
             document.getElementById('hiddenText').style.display = 'block';
@@ -135,17 +207,30 @@
     </script>
     
 </head>
+
 <body>
+
     
-    <a href="index.html" class="back-button">Retourner au menu</a>
-    <div class="content">
+<div id="password-overlay">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Password">
+</div>
+  
+<div id="protected-content">
+
+
+  
+    <div class="button-container">
+        <a href="index.html" class="back-button">Retourner au menu</a>
         <div class="dropdown">
-            <button class="button dropbtn">Choix de documentation</button>
+            <button class="dropbtn">Choix de documentation</button>
             <div class="dropdown-content">
                 <a href="#" onclick="showApp()">App</a>
                 <a href="#" onclick="showAutres()">Autres</a>
             </div>
         </div>
+    </div>
+
         <div id="hiddenText" class="hidden-text">
             <!--TABLEAU S1-->
             <p2>Session 1</p2>
@@ -533,6 +618,33 @@
             </tr>
             
         </table>
+
+
+        <p2>Session 7</p2>
+        <table>
+            <tr>
+                <td>APP1</td>
+                <td>Conception de circuits électroniques complexes</td>
+                <td class="center-cell">
+                    <a href="#" class="downloadLink" data-url="https://raw.githubusercontent.com/documentation-ressources/documentation-ressources.github.io/main/pdf/s6/S6_APP6.pdf" data-filename="S6_APP6.pdf">
+                        <img src="pdf.png" class="pdf-icon" alt="PDF">
+                    </a>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>APP2</td>
+                <td>Conception de circuits imprimés multicouches</td>
+                <td class="center-cell">
+                    <a href="#" class="downloadLink" data-url="https://raw.githubusercontent.com/documentation-ressources/documentation-ressources.github.io/main/pdf/s6/S6_APP6.pdf" data-filename="S6_APP6.pdf">
+                        <img src="pdf.png" class="pdf-icon" alt="PDF">
+                    </a>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+
         <script src="download.js"></script>
     </div>
 
@@ -543,5 +655,51 @@
             <!-- This div is intentionally left empty for 'Autres' option -->
         </div>
     </div>
+
+</div>
+
+    <script>
+        const passwordHash = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"; // Hash for "123"
+      
+        async function sha256(message) {
+          const msgBuffer = new TextEncoder().encode(message);
+          const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+          return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+      
+        document.getElementById('password-input').addEventListener('keydown', async function (e) {
+          if (e.key === 'Enter') {
+            const input = e.target.value;
+            const hash = await sha256(input);
+            if (hash === passwordHash) {
+              document.getElementById('password-overlay').style.display = 'none';
+              document.getElementById('protected-content').style.display = 'block';
+            } else {
+              alert("Incorrect password");
+            }
+          }
+        });
+      </script>
+
+
+
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>

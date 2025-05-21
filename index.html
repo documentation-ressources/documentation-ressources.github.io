@@ -3,58 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation/Ressources</title>
+    <title>Archive</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+         @font-face {
+            font-family: 'Poppins';
+            src: url('fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            src: url('fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            src: url('fonts/Poppins/Poppins-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            src: url('fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            src: url('fonts/Poppins/Poppins-Black.ttf') format('truetype');
+            font-weight: 900;
+            font-style: normal;
+        }
+
 
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
-            background-color: #f5f7fa;
+            background: url('background.jpg') center/cover no-repeat fixed;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: -1;
         }
 
         h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: #333;
+            font-size: 5em; /* Bigger text size */
+            margin-bottom: 50px;
+            font-weight: 900; /* Extra bold */
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+            letter-spacing: 1px;
+            line-height: 1.1;
         }
 
         .buttons {
             display: flex;
-            gap: 20px;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 800px;
+            z-index: 1;
         }
 
         .button {
-            border: 2px solid #333;
-            padding: 10px 20px;
+            border: none;
+            padding: 18px 35px;
             text-align: center;
             text-decoration: none;
-            color: #333;
-            font-size: 1em;
-            transition: background-color 0.3s, color 0.3s;
-            border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            min-width: 200px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                          rgba(138, 43, 226, 0.6) 0%, 
+                          rgba(75, 0, 130, 0.6) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .button:hover {
-            background-color: #333;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
             color: #fff;
+        }
+
+        .button:hover::before {
+            opacity: 1;
+        }
+
+        .button:active {
+            transform: translateY(2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5em;
+                margin-bottom: 40px;
+            }
+            
+            .buttons {
+                gap: 20px;
+            }
+            
+            .button {
+                padding: 15px 30px;
+                min-width: 160px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.8em;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            
+            .button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Documentation/ressources</h1>
+    <h1>ARCHIVE</h1>
     <div class="buttons">
         <a href="doc.html" class="button">Documentation</a>
-        <a href="ressources.html" class="button">Ressources</a>
         <a href="scripts.html" class="button">Scripts</a>
     </div>
 </body>
