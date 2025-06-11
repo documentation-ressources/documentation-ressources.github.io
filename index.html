@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive</title>
     <style>
-         @font-face {
+        @font-face {
             font-family: 'Poppins';
             src: url('fonts/Poppins/Poppins-Regular.ttf') format('truetype');
             font-weight: normal;
@@ -39,7 +39,6 @@
             font-weight: 900;
             font-style: normal;
         }
-
 
         body {
             display: flex;
@@ -115,8 +114,8 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, 
-                          rgba(138, 43, 226, 0.6) 0%, 
-                          rgba(75, 0, 130, 0.6) 100%);
+                                 rgba(138, 43, 226, 0.6) 0%, 
+                                 rgba(75, 0, 130, 0.6) 100%);
             z-index: -1;
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -136,6 +135,23 @@
             transform: translateY(2px);
         }
 
+        .readme-link {
+            margin-top: 30px; /* Espace au-dessus du lien */
+            font-family: 'Poppins', sans-serif; /* Applique la police Poppins */
+            font-size: 1.1em;
+            color: #ffffff; /* Texte blanc */
+            font-weight: bold; /* Texte en gras */
+            text-decoration: none; /* Pas de soulignement par défaut */
+            transition: color 0.3s ease, transform 0.3s ease;
+            z-index: 1; /* S'assure qu'il est au-dessus de l'arrière-plan */
+        }
+
+        .readme-link:hover {
+            color: #8A2BE2; /* Violet au survol */
+            transform: translateY(-2px); /* Léger soulèvement au survol */
+            text-decoration: underline; /* Soulignement au survol */
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 3.5em;
@@ -150,6 +166,11 @@
                 padding: 15px 30px;
                 min-width: 160px;
                 font-size: 1.1em;
+            }
+
+            .readme-link {
+                margin-top: 25px;
+                font-size: 1em;
             }
         }
 
@@ -167,6 +188,11 @@
             .button {
                 width: 100%;
             }
+
+            .readme-link {
+                margin-top: 20px;
+                font-size: 0.95em;
+            }
         }
     </style>
 </head>
@@ -176,5 +202,6 @@
         <a href="doc.html" class="button">Documentation</a>
         <a href="scripts.html" class="button">Scripts</a>
     </div>
+    <a href="README.md" class="readme-link" target="_blank">README</a>
 </body>
 </html>
